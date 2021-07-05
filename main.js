@@ -178,7 +178,7 @@ const studentObj = {
 
 // With destructuring
 const {objName, age: ageValue} = studentObj; // Get the right key to set variables to value, use : to change key name like age to ageValue
-console.log(objName,ageValue);
+// console.log(objName,ageValue);
 
 /** String template */
 
@@ -187,7 +187,7 @@ const str = 'My name is' + randomName;
 const templateStr = `My Name is ${randomName}`;
 
 /** Enhanced object literals (Shorthand syntax) */
-const personAge = 18;
+/** const personAge = 18;
 var person = {
     personName: 'Not Important', //comma
     personAge, // personAge: personAge
@@ -195,4 +195,97 @@ var person = {
     getAge: function() {
         return 2021 - this.age;
     }
-}
+}; */
+
+
+/** Spread operator (...)
+ * Copy Array
+ * Copy Object
+ * Tham trị (pass by value), tham chiếu (pass by reference)
+ * Concatenate Array
+ * Add item to Array
+ * Use Array as function parameters
+ */
+
+const person = ['A', 'B', 'C'];
+// console.log(...person); -> all Array items
+/** let nums1 = [1, 2, 3];
+let nums2 = nums1;
+nums2.push(4);
+// console.log(nums1); -> nums1 will change when nums2 changes, due to pass by reference
+// console.log(nums2);*/
+
+/** Pass by Referance
+ * Do not create new memmory space
+ * Ref nums1 and nums2 together, changing 1 will change both values
+ * Works only with arrays, not with primary variables
+ */
+
+var nums1 = [1, 2, 3];
+var nums2 = [...nums1];
+nums2.push(4); // or [...nums1, 4]
+// console.log(nums1); -> nums1 will NOT change when nums2 changes
+// console.log(nums2)
+
+/** Concatenate Array */
+var nums1 = [1, 2, 3];
+var nums2 = [4, 5, 6];
+
+// var nums3 = nums1.concat(nums2); // append nums2 to nums1
+
+var nums3 = [...nums1, ...nums2]; // insert nums2 to nums1 to make nums3
+
+/** Copy object */
+
+var obj1 = {
+    a: 1,
+    b: 2,
+};
+var obj2 = {...obj1, c:3, a:2}; // Simillar to array, object has pass by reference, assign new value to key a
+
+const users = ['a', 'b', 'c'];
+const showUsers = (user1,user2,user3) => console.log(user1, user2, user3);
+// showUsers(...users); -> function using 3 paras
+
+/** Rest Parameter */
+/* const calcSum = (num1, num2, num3) => console.log(num1 + num2 + num3);
+calcSum(1,2,3); -> normal way of calculating */
+
+const calcSum = (...nums) => {
+    let sum = 0;
+    nums.forEach(num => {
+        sum += num;
+    });
+    console.log(sum);
+};
+// calcSum(1,2,3,4,5); -> doesnt matter how many arguments
+
+
+/** ES6 Module
+ * - import
+ * - export
+ */
+
+import {getLocalStorage, setLocalStorage} from './utils.js'; // destructuring, set index.html script to type module to use export items
+
+/** ES6 Class - basically a function
+ * Expression and Declaration
+ */
+
+// const Person = class {
+//     // Class Expression
+// };
+
+class Operation {
+    // Class Declaration
+    constructor(argu1, argu2) {
+        this.a = argu1;
+        this.b = argu2;
+    };
+    calcSum() {
+        return this.a + this.b;
+    };
+};
+
+let Guy = new Operation(3,4);
+console.log(Guy.calcSum());
